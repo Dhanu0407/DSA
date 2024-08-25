@@ -63,6 +63,34 @@ public void deleteLast(){
     }
     secondLast.next = null;
 }
+public void reverseIterate(){
+    if(head == null || head.next == null){
+        return;
+    }
+    Node prevNode = head;
+    Node currNode = head.next;
+
+    while(currNode!=null){
+        Node nextNode = currNode.next;
+        currNode.next = prevNode;
+
+        prevNode = currNode;
+        currNode = nextNode;
+    }
+    head.next = null;
+    head = prevNode;
+}
+public Node reverseRecursive(Node head){
+    if(head==null || head.next==null){
+      return head;
+    }
+    Node newHead = reverseRecursive(head.next);
+    head.next.next = head;
+    head.next = null;
+
+    return newHead;
+
+}
 public static void main(String[] args) {
     LL list = new LL();
     list.addFirst("1");
@@ -70,7 +98,11 @@ public static void main(String[] args) {
     list.addLast("3");
     list.addLast("4");
     list.printList();
-    list.deleteFirst();
+    // list.deleteFirst();
+    // list.printList();
+    // list.reverseIterate();
+    // list.printList();
+    list.head=list.reverseRecursive(list.head);
     list.printList();
 
 }
